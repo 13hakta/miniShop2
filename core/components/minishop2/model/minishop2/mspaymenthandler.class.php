@@ -126,11 +126,11 @@ class msPaymentHandler implements msPaymentInterface {
 	 * @return string
 	 */
 	public function getOrderHash(msOrder $order) {
-		return md5(
+		return sha1(
 			$order->get('id') .
 			$order->get('cart_cost') .
 			$order->get('delivery_cost') .
-			$order->get('createdon')
+			$order->get('createdon') . $this->modx->getOption('site_id')
 		);
 	}
 }
